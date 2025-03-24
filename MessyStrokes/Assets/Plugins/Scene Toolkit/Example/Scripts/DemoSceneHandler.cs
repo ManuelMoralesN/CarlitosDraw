@@ -12,16 +12,16 @@ namespace CG.SceneToolkit
         [SerializeField] string demoSceneName;
 
         [Space]
-        [SerializeField] string autoTriggerSceneName;
-        [SerializeField] string autoTriggerWithDelaySceneName;
+        [SerializeField] string createRoom;
+        [SerializeField] string joinRoom;
 
         [Space]
         [SerializeField] string manualTriggerWithKeyPressSceneName;
         [SerializeField] string manualTriggerManualActivationSceneName;
 
         public string DemoSceneName => demoSceneName;
-        public string AutoTriggerSceneName => autoTriggerSceneName;
-        public string AutoTriggerWithDelaySceneName => autoTriggerWithDelaySceneName;
+        public string CreateRoom => createRoom;
+        public string JoinRoom => joinRoom;
         public string ManualTriggerWithKeyPressSceneName => manualTriggerWithKeyPressSceneName;
         public string ManualTriggerWithManualActivationSceneName => manualTriggerManualActivationSceneName;
 
@@ -36,13 +36,13 @@ namespace CG.SceneToolkit
         public void LoadAutoTriggerScene()
         {
             demoCanvas.SetActive(false);
-            SceneLoadManager.Load(autoTriggerSceneName, sceneSettings);
+            SceneLoadManager.Load(createRoom, sceneSettings);
         }
 
         public void LoadAutoTriggerSceneWithDelay()
         {
             demoCanvas.SetActive(false);
-            SceneLoadManager.Load(autoTriggerWithDelaySceneName, sceneSettings);
+            SceneLoadManager.Load(joinRoom, sceneSettings);
         }
 
         public void LoadManualTriggerSceneWithKeyPress()

@@ -1580,7 +1580,7 @@ GameObject:
   - component: {fileID: 1262332453}
   - component: {fileID: 1262332452}
   m_Layer: 0
-  m_Name: _UIManager
+  m_Name: Demo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1710,7 +1710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -855298285791758126, guid: 43bf989846222c14684ae0f31ebc1fb7, type: 3}
+  m_Sprite: {fileID: -6470460504253458178, guid: 91b7479cc5e722e4c8349edc7f41a069, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2123,8 +2123,8 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 1262332453}
   - {fileID: 1757575176}
   - {fileID: 2118633481}
   - {fileID: 2116856773}
+  - {fileID: 1262332453}
   - {fileID: 1182118541}
