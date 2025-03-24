@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b47d5f3448e76a44fa375071975b6d2a
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scenes/Demo.unity
+  uploadId: 724103

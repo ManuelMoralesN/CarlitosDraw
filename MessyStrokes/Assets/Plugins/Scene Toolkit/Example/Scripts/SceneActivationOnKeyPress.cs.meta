@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8dfeed633f8b9f14e93928acee3b32e7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scripts/SceneActivationOnKeyPress.cs
+  uploadId: 724103

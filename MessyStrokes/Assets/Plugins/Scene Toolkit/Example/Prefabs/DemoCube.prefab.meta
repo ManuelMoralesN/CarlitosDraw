@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ee2036c87ec0f9e468fca90fc0e55a1e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Prefabs/DemoCube.prefab
+  uploadId: 724103

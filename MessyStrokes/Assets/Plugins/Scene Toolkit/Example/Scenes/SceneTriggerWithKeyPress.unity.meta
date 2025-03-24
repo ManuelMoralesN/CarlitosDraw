@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 27c59908da0514142a135f5f0a71e793
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scenes/SceneTriggerWithKeyPress.unity
+  uploadId: 724103

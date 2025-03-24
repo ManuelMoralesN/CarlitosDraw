@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c7ca2ba4e0c542e41871e7e76df3038c
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scenes/SceneTriggerWithDelay.unity
+  uploadId: 724103

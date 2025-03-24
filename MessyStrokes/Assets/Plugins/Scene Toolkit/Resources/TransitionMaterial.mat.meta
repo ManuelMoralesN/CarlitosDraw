@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c4b6e983a76d29b489ef72bcbc44d2ee
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Resources/TransitionMaterial.mat
+  uploadId: 724103

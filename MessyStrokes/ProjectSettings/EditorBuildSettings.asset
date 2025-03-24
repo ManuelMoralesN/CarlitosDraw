@@ -8,6 +8,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Plugins/Scene Toolkit/Example/Scenes/SceneTrigger.unity
+    guid: 2f20485c4aa5d8c47b7d0dfbe5345b7b
+  - enabled: 1
+    path: Assets/Plugins/Scene Toolkit/Example/Scenes/Demo.unity
+    guid: b47d5f3448e76a44fa375071975b6d2a
+  - enabled: 1
+    path: Assets/Plugins/Scene Toolkit/Example/Scenes/SceneTriggerWithDelay.unity
+    guid: c7ca2ba4e0c542e41871e7e76df3038c
+  - enabled: 1
+    path: Assets/Plugins/Scene Toolkit/Example/Scenes/SceneTriggerWithKeyPress.unity
+    guid: 27c59908da0514142a135f5f0a71e793
+  - enabled: 1
+    path: Assets/Plugins/Scene Toolkit/Example/Scenes/SceneTriggerWithManualActivation.unity
+    guid: c29ce1056e0f2a64c96fb9350a75e5e3
+  - enabled: 1
+    path: Assets/Plugins/Scene Toolkit/Resources/Loading.unity
+    guid: 712a0b25dd1942d42bc446d6a55ad102
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

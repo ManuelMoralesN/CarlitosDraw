@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a15241485fee1bd4db9bc36e2ab4d7a7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 24100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Audio/MainMixer.mixer
+  uploadId: 724103

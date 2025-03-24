@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6a56d43f06f0b014dbfa73b5fc0181dd
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Bootstrapper/com.CG.SceneToolkit.Bootstrap.asmdef
+  uploadId: 724103

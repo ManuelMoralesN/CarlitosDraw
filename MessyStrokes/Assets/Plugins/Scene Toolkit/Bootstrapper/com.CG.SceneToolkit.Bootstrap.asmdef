@@ -1,0 +1,14 @@
+{
+    "name": "com.CG.SceneToolkit.Bootstrap",
+    "rootNamespace": "CG.SceneToolkit.Bootstrap",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

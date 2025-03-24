@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 5c2be37c90b437a49b80a0a6e87cc08f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Editor/SceneSettingsEditor.cs
+  uploadId: 724103

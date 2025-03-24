@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c29ce1056e0f2a64c96fb9350a75e5e3
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scenes/SceneTriggerWithManualActivation.unity
+  uploadId: 724103

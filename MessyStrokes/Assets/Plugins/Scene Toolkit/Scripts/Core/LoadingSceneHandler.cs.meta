@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ca7098b791cf37e44b9524ecd79c5e30
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: a79b7bdccc3633746a3d7c878a90e504, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Scripts/Core/LoadingSceneHandler.cs
+  uploadId: 724103

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 520f49e62bc3f904f816a029c6857530
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Scripts/Interfaces/ISceneActivationKey.cs
+  uploadId: 724103

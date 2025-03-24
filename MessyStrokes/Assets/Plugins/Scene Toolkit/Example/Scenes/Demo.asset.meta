@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eb0afaedf977f8a4f948f62234268dd1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scenes/Demo.asset
+  uploadId: 724103

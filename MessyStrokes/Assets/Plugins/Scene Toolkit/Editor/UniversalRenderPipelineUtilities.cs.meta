@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: cf3b6dd594ea2ef4aa5e5c04f86bfad2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Editor/UniversalRenderPipelineUtilities.cs
+  uploadId: 724103

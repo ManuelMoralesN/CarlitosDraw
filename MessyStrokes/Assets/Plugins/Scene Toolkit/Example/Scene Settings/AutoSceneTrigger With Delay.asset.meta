@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 44ce85afa13fceb42835b17476e2632a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scene Settings/AutoSceneTrigger
+    With Delay.asset
+  uploadId: 724103

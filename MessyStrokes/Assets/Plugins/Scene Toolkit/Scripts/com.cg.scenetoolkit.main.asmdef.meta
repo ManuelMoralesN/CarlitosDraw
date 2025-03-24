@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4e1e4ab5cf296eb42b31edcc6d21030b
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Scripts/com.cg.scenetoolkit.main.asmdef
+  uploadId: 724103

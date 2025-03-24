@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2f20485c4aa5d8c47b7d0dfbe5345b7b
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scenes/SceneTrigger.unity
+  uploadId: 724103

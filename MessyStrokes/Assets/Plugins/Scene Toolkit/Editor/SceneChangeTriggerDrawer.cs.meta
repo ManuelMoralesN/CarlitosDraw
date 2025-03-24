@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 68d5c0cce6015834ca47966bd418ba27
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Editor/SceneChangeTriggerDrawer.cs
+  uploadId: 724103

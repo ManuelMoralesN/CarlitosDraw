@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d3ce4c4344a94264ab349d2c77d4ea21
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Editor/SceneTransitionSettingsDrawer.cs
+  uploadId: 724103

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 18cc1263b45e6fd49a778040b6525ec9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 274184
+  packageName: Scene Toolkit
+  packageVersion: 1.01
+  assetPath: Assets/Plugins/Scene Toolkit/Example/Scene Settings/AutoSceneTrigger
+    With Key Press.asset
+  uploadId: 724103
