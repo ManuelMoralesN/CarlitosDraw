@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mancha verde_0: -8409524790073659686
+      Mancha verde_1: 2139864396330251112
+      Mancha verde_2: 8278025468098270005
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

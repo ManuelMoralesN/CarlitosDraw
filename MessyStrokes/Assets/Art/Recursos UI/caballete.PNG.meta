@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      caballete_0: 6687530872574790113
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

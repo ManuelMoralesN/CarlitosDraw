@@ -159,7 +159,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mancha rosa_0: -280004276078125011
+      Mancha rosa_1: 5583217894308498482
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
