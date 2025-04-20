@@ -1,139 +1,117 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class LocalMultiplayerManager : MonoBehaviour
+public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
 {
     [Header("Duraciones (segundos)")]
-    public float viewDuration = 30f;       // Tiempo para ver la imagen y el container
-    public float drawDuration = 30f;       // Tiempo para dibujar
-    public float turnEndDuration = 2f;     // Tiempo de mensaje de fin de turno
-    public float playerTime = 180f;        // Tiempo asignado por jugador (p.ej., 3 minutos)
+    public float viewDuration = 30f;
+    public float drawDuration = 30f;
+    public int totalRounds = 3;
 
-    [Header("Referencias UI")]
-    public TextMeshProUGUI feedbackText;   // Texto para mensajes de feedback
-    public TextMeshProUGUI timerText;      // Texto para mostrar el contador principal
-    public GameObject referenceImage;      // Imagen de referencia (se muestra en la fase de vista)
-    public GameObject drawingCoverPanel;   // Panel que cubre la pantalla durante la fase de dibujo
+    [Header("UI")]
+    public TextMeshProUGUI feedbackText;
+    public TextMeshProUGUI timerText;
+    public GameObject referenceImage;
+    public GameObject drawingCoverPanel;
 
-    [Header("Control de Dibujo")]
-    public GameManager drawingController;   // Componente que habilita la entrada para dibujar
-    public RectTransform drawingArea;               // Área de dibujo (contenedor temporal de los trazos)
+    [Header("Dibujo")]
+    public GameManager drawingController;
+    public RectTransform drawingArea;
 
-    [Header("Contenedores de Progreso")]
-    public RectTransform player1Container; // Container para guardar los trazos del jugador 1
-    public RectTransform player2Container; // Container para guardar los trazos del jugador 2
+    [Header("Contenedores")]
+    public RectTransform player1Container;
+    public RectTransform player2Container;
 
     [Header("Votación")]
-    public VotingScreenManager votingScreenManager;  // Referencia al gestor de votación
+    public VotingScreenManager votingScreenManager;
 
-    private int currentPlayer = 1;
-    private float elapsedPlayer1 = 0f;
-    private float elapsedPlayer2 = 0f;
+    private RectTransform myContainer;
 
     void Start()
     {
-        StartCoroutine(RunGame());
+        // Determinar el contenedor propio según ActorNumber
+        int actor = PhotonNetwork.LocalPlayer.ActorNumber;
+        myContainer = (actor == 1) ? player1Container : player2Container;
+        player1Container.gameObject.SetActive(false);
+        player2Container.gameObject.SetActive(false);
+
+        // Solo el MasterClient inicia la partida en todos
+        if (PhotonNetwork.IsMasterClient)
+            photonView.RPC(nameof(RPC_StartGame), RpcTarget.All);
     }
 
-    IEnumerator RunGame()
+    [PunRPC]
+    void RPC_StartGame()
     {
-        // Se repite mientras al menos uno de los jugadores tenga tiempo restante.
-        while (elapsedPlayer1 < playerTime || elapsedPlayer2 < playerTime)
+        StartCoroutine(GameFlow());
+    }
+
+    IEnumerator GameFlow()
+    {
+        for (int round = 1; round <= totalRounds; round++)
         {
-            if (currentPlayer == 1)
+            // Mostrar número de ronda
+            feedbackText.text = $"Ronda {round}/{totalRounds}";
+            timerText.text = "";
+            yield return new WaitForSeconds(1f);
+
+            // --- Fase de Referencia ---
+            referenceImage.SetActive(true);
+            drawingCoverPanel.SetActive(false);
+            drawingController.enabled = false;
+            myContainer.gameObject.SetActive(true);
+
+            float t = viewDuration;
+            while (t > 0f)
             {
-                if (elapsedPlayer1 < playerTime)
-                {
-                    yield return StartCoroutine(RunTurn(1, player1Container));
-                }
-                currentPlayer = 2;
+                feedbackText.text = $"Ronda {round}: Mira la referencia ({Mathf.Ceil(t)}s)";
+                timerText.text = $"{Mathf.Ceil(t)} s";
+                t -= Time.deltaTime;
+                yield return null;
             }
-            else // currentPlayer == 2
+            referenceImage.SetActive(false);
+
+            // --- Fase de Dibujo ---
+            drawingCoverPanel.SetActive(true);
+            drawingController.enabled = true;
+
+            t = drawDuration;
+            while (t > 0f)
             {
-                if (elapsedPlayer2 < playerTime)
-                {
-                    yield return StartCoroutine(RunTurn(2, player2Container));
-                }
-                currentPlayer = 1;
+                feedbackText.text = $"Ronda {round}: Dibuja! ({Mathf.Ceil(t)}s)";
+                timerText.text = $"{Mathf.Ceil(t)} s";
+                t -= Time.deltaTime;
+                yield return null;
             }
+
+            // Guardar los trazos de esta ronda
+            drawingController.enabled = false;
+            ReparentChildren(drawingArea, myContainer);
+            drawingCoverPanel.SetActive(false);
+
+            // Pausa antes de siguiente ronda
+            feedbackText.text = $"Fin de ronda {round}";
+            timerText.text = "";
+            yield return new WaitForSeconds(2f);
         }
 
-        // Fin de la partida: se muestran los dibujos para votar.
-        feedbackText.text = "¡Partida terminada!";
-        timerText.text = "";
-        referenceImage.SetActive(true);
-        drawingCoverPanel.SetActive(false);
+        // Iniciar votación tras todas las rondas
+        if (PhotonNetwork.IsMasterClient)
+            photonView.RPC(nameof(RPC_StartVoting), RpcTarget.All);
+    }
 
-        // Llama al gestor de votación.
+    [PunRPC]
+    void RPC_StartVoting()
+    {
         votingScreenManager.ShowVotingScreen();
     }
 
-    IEnumerator RunTurn(int playerNumber, RectTransform playerContainer)
-    {
-        // --- Fase de Vista ---
-        // Mostrar la imagen de referencia y el container del jugador (para que vea lo que ha pintado)
-        playerContainer.gameObject.SetActive(true);
-        referenceImage.SetActive(true);
-        drawingCoverPanel.SetActive(false);
-        drawingController.enabled = false;
-
-        float viewTimeLeft = viewDuration;
-        while (viewTimeLeft > 0f)
-        {
-            feedbackText.text = "Jugador " + playerNumber + ": Tienes " + Mathf.Ceil(viewTimeLeft).ToString() + " s para ver la imagen y tus trazos.";
-            timerText.text = Mathf.Ceil(viewTimeLeft).ToString() + " s";
-            viewTimeLeft -= Time.deltaTime;
-            yield return null;
-        }
-        if (playerNumber == 1)
-            elapsedPlayer1 += viewDuration;
-        else
-            elapsedPlayer2 += viewDuration;
-
-        // Ocultar la imagen y el container al terminar la fase de vista.
-        referenceImage.SetActive(false);
-        playerContainer.gameObject.SetActive(false);
-
-        // --- Fase de Dibujo ---
-        // Se activa el panel que cubre la pantalla y se habilita el dibujo.
-        drawingCoverPanel.SetActive(true);
-        drawingController.enabled = true;
-
-        float drawTimeLeft = drawDuration;
-        while (drawTimeLeft > 0f)
-        {
-            feedbackText.text = "Jugador " + playerNumber + " Dibuja!";
-            timerText.text = Mathf.Ceil(drawTimeLeft).ToString() + " s";
-            drawTimeLeft -= Time.deltaTime;
-            yield return null;
-        }
-        if (playerNumber == 1)
-            elapsedPlayer1 += drawDuration;
-        else
-            elapsedPlayer2 += drawDuration;
-
-        // Finaliza el turno: deshabilita el dibujo, guarda los trazos en el container correspondiente y oculta el container.
-        drawingController.enabled = false;
-        ReparentChildren(drawingArea, playerContainer);
-        playerContainer.gameObject.SetActive(false);
-
-        feedbackText.text = "Turno finalizado para Jugador " + playerNumber;
-        yield return new WaitForSeconds(turnEndDuration);
-        if (playerNumber == 1)
-            elapsedPlayer1 += turnEndDuration;
-        else
-            elapsedPlayer2 += turnEndDuration;
-    }
-
-    // Mueve todos los hijos (trazos) de 'drawingArea' al container 'to'
     void ReparentChildren(RectTransform from, RectTransform to)
     {
-        int count = from.childCount;
-        for (int i = count - 1; i >= 0; i--)
-        {
-            Transform child = from.GetChild(i);
-            child.SetParent(to, false);
-        }
+        for (int i = from.childCount - 1; i >= 0; i--)
+            from.GetChild(i).SetParent(to, false);
     }
 }
