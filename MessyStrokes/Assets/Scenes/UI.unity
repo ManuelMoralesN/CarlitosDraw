@@ -216,9 +216,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1262332452}
-        m_TargetAssemblyTypeName: CG.SceneToolkit.DemoSceneHandler, Assembly-CSharp-firstpass
-        m_MethodName: LoadGameplay
+      - m_Target: {fileID: 1262332454}
+        m_TargetAssemblyTypeName: PantallaManager, Assembly-CSharp
+        m_MethodName: IrAlGameplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1221,7 +1221,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1262332454}
         m_TargetAssemblyTypeName: PantallaManager, Assembly-CSharp
-        m_MethodName: IrAUnirseSala
+        m_MethodName: IrALobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2504,7 +2504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &444396596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3739,7 +3739,7 @@ MonoBehaviour:
   sceneSettings: {fileID: 11400000, guid: eb0afaedf977f8a4f948f62234268dd1, type: 2}
   demoCanvas: {fileID: 2118633477}
   demoSceneName: UI
-  gameplayScene: Gameplay
+  gameplayScene: 
   joinRoom: 
   manualTriggerWithKeyPressSceneName: SceneTriggerWithKeyPress
   manualTriggerManualActivationSceneName: SceneTriggerWithManualActivation
@@ -5421,7 +5421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2118633478
 MonoBehaviour:
   m_ObjectHideFlags: 0

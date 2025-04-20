@@ -34,7 +34,7 @@ public class PantallaManager : MonoBehaviour
     public void IrAMenu() => MostrarSolo(panelMenu);
     public void IrATienda() => MostrarSolo(panelTienda);
     public void IrCanvaGameplay() => MostrarSolo(panelGameplay);
-    public void IrAlGameplay() => SceneManager.LoadScene("Gameplay");
+    public void IrAlGameplay() => SceneManager.LoadScene("LocalGame");
 
     public void SalirApp() => Application.Quit();
 
