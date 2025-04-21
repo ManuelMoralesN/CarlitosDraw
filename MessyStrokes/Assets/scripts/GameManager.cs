@@ -57,22 +57,49 @@ public class GameManager : MonoBehaviourPun
 
     void StartNewLine()
     {
-        // Instanciamos la línea en red para que todos los clientes la vean
-        GameObject lineObj = PhotonNetwork.InstantiateRoomObject(
-            "LinesPrefab",       // Debe coincidir con el nombre del prefab en Resources
-            Vector3.zero,
-            Quaternion.identity,
-            0                        // Grupo de interés (usualmente 0)
-        );
-        // Lo parentamos dentro de drawingArea para que aparezca en UI
-        lineObj.transform.SetParent(drawingArea, false);
-
-        currentLine = lineObj.GetComponent<UILineRenderer>();
-        if (currentLine == null)
-        {
-            Debug.LogError("El prefab no tiene el componente UILineRenderer");
-            return;
-        }
-        currentLine.Points = new List<Vector2>();
+     // Verificación básica
+    if (drawingArea == null)
+    {
+        Debug.LogError("drawingArea no asignado en GameManager.");
+        return;
     }
+
+    if (!PhotonNetwork.IsConnectedAndReady)
+    {
+        Debug.LogWarning("No estás conectado a Photon. Abortando instanciación.");
+        return;
+    }
+
+    Debug.Log("Llamando PhotonNetwork.Instantiate(\"LinesPrefab\")");
+
+    // Instancia el objeto en red
+    GameObject lineObj = PhotonNetwork.Instantiate(
+        "LinesPrefab",             // Asegúrate que este nombre sea exacto
+        Vector3.zero,
+        Quaternion.identity
+    );
+
+    if (lineObj == null)
+    {
+        Debug.LogError("PhotonNetwork.Instantiate devolvió null");
+        return;
+    }
+
+    // 🔥 Aseguramos que el objeto se parenta a drawingArea, en todos los clientes
+    lineObj.transform.SetParent(drawingArea, false);
+
+    // Obtén el componente de línea
+    currentLine = lineObj.GetComponent<UILineRenderer>();
+    if (currentLine == null)
+    {
+        Debug.LogError("El prefab 'LinesPrefab' no tiene componente UILineRenderer.");
+        return;
+    }
+
+    currentPoints.Clear();
+    currentLine.Points = new List<Vector2>();
+
+    Debug.Log("Línea preparada para dibujar.");
+    }
+    
 }

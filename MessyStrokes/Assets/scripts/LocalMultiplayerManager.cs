@@ -25,14 +25,14 @@ public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
     public RectTransform player1Container;
     public RectTransform player2Container;
 
-    [Header("Votaci n")]
+    [Header("Votacion")]
     public VotingScreenManager votingScreenManager;
 
     private RectTransform myContainer;
 
     void Start()
     {
-        // Determinar el contenedor propio seg n ActorNumber
+        // Determinar el contenedor propio según ActorNumber
         int actor = PhotonNetwork.LocalPlayer.ActorNumber;
         myContainer = (actor == 1) ? player1Container : player2Container;
         player1Container.gameObject.SetActive(false);
@@ -53,12 +53,11 @@ public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
     {
         for (int round = 1; round <= totalRounds; round++)
         {
-            // Mostrar n mero de ronda
             feedbackText.text = $"Ronda {round}/{totalRounds}";
             timerText.text = "";
             yield return new WaitForSeconds(1f);
 
-            // --- Fase de Referencia ---
+            // Fase de Referencia
             referenceImage.SetActive(true);
             drawingCoverPanel.SetActive(false);
             drawingController.enabled = false;
@@ -74,7 +73,7 @@ public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
             }
             referenceImage.SetActive(false);
 
-            // --- Fase de Dibujo ---
+            // Fase de Dibujo
             drawingCoverPanel.SetActive(true);
             drawingController.enabled = true;
 
@@ -87,18 +86,17 @@ public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
                 yield return null;
             }
 
-            // Guardar los trazos de esta ronda
+            // Guardar los trazos de esta ronda en ambos contenedores
             drawingController.enabled = false;
-            ReparentChildren(drawingArea, myContainer);
+            ReparentChildren(drawingArea, myContainer); // ¡Aquí se hace la magia!
             drawingCoverPanel.SetActive(false);
 
-            // Pausa antes de siguiente ronda
             feedbackText.text = $"Fin de ronda {round}";
             timerText.text = "";
             yield return new WaitForSeconds(2f);
         }
 
-        // Iniciar votaci n tras todas las rondas
+        // Al terminar todas las rondas, iniciar votación
         if (PhotonNetwork.IsMasterClient)
             photonView.RPC(nameof(RPC_StartVoting), RpcTarget.All);
     }
@@ -109,9 +107,29 @@ public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
         votingScreenManager.ShowVotingScreen();
     }
 
-    void ReparentChildren(RectTransform from, RectTransform to)
+    // 👇 NUEVA VERSIÓN: Reparte trazos según dueño
+    void ReparentChildren(RectTransform from, RectTransform fallbackContainer)
     {
         for (int i = from.childCount - 1; i >= 0; i--)
-            from.GetChild(i).SetParent(to, false);
+        {
+            Transform child = from.GetChild(i);
+            PhotonView pv = child.GetComponent<PhotonView>();
+
+            if (pv != null && pv.Owner != null)
+            {
+                int actor = pv.Owner.ActorNumber;
+
+                if (actor == 1)
+                    child.SetParent(player1Container, false);
+                else if (actor == 2)
+                    child.SetParent(player2Container, false);
+                else
+                    child.SetParent(fallbackContainer, false);
+            }
+            else
+            {
+                child.SetParent(fallbackContainer, false);
+            }
+        }
     }
 }

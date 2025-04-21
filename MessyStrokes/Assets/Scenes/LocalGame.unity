@@ -3318,8 +3318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8802c276da26f8e4ebbd0397df7155c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewDuration: 30
-  drawDuration: 30
+  viewDuration: 10
+  drawDuration: 10
   totalRounds: 3
   feedbackText: {fileID: 232906212}
   timerText: {fileID: 494570355}
