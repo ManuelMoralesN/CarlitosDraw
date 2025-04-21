@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7161381202786543875}
   - component: {fileID: 8255406572112741324}
   - component: {fileID: 6763096749709166602}
+  - component: {fileID: 5417159611049030331}
   m_Layer: 5
   m_Name: LinesPrefab
   m_TagString: Untagged
@@ -63,3 +64,25 @@ MonoBehaviour:
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   Points: []
   Thickness: 5
+--- !u!114 &5417159611049030331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673297744120532234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

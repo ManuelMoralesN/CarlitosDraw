@@ -25,14 +25,14 @@ public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
     public RectTransform player1Container;
     public RectTransform player2Container;
 
-    [Header("Votación")]
+    [Header("Votaci n")]
     public VotingScreenManager votingScreenManager;
 
     private RectTransform myContainer;
 
     void Start()
     {
-        // Determinar el contenedor propio según ActorNumber
+        // Determinar el contenedor propio seg n ActorNumber
         int actor = PhotonNetwork.LocalPlayer.ActorNumber;
         myContainer = (actor == 1) ? player1Container : player2Container;
         player1Container.gameObject.SetActive(false);
@@ -53,7 +53,7 @@ public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
     {
         for (int round = 1; round <= totalRounds; round++)
         {
-            // Mostrar número de ronda
+            // Mostrar n mero de ronda
             feedbackText.text = $"Ronda {round}/{totalRounds}";
             timerText.text = "";
             yield return new WaitForSeconds(1f);
@@ -98,7 +98,7 @@ public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(2f);
         }
 
-        // Iniciar votación tras todas las rondas
+        // Iniciar votaci n tras todas las rondas
         if (PhotonNetwork.IsMasterClient)
             photonView.RPC(nameof(RPC_StartVoting), RpcTarget.All);
     }

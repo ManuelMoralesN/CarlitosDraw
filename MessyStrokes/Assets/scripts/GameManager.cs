@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;  // Necesario para PhotonNetwork
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
-    [Header("ConfiguraciÛn de Dibujo")]
-    public RectTransform drawingArea;      // ¡rea de dibujo UI (por ejemplo, una Image de fondo)
-    public GameObject uiLinePrefab;        // Prefab que contiene el componente UILineRenderer
-    public float minDistance = 5f;         // Distancia mÌnima (en pÌxeles) para agregar un nuevo punto
+    [Header("Configuraci√≥n de Dibujo")]
+    public RectTransform drawingArea;      // √Årea de dibujo UI (por ejemplo, una Image de fondo)
+    public GameObject LinesPrefab;        // Prefab (en Resources/) con UILineRenderer + PhotonView
+    public float minDistance = 5f;         // Distancia m√≠nima (en pixeles) para agregar un nuevo punto
 
     private UILineRenderer currentLine;    // La stroke actual
     private List<Vector2> currentPoints = new List<Vector2>();
@@ -20,10 +21,10 @@ public class GameManager : MonoBehaviour
 
     void ProcessDrawing()
     {
-        // Procesa la entrada solo si el puntero est· dentro del ·rea de dibujo
+        // Procesa la entrada solo si el puntero est√° dentro del √°rea de dibujo
         if (!RectTransformUtility.RectangleContainsScreenPoint(drawingArea, Input.mousePosition, null))
         {
-            // Si el puntero sale, se reinicia la stroke actual para evitar conectar trazos
+            // Si el puntero sale, se reinicia la stroke actual
             currentLine = null;
             currentPoints.Clear();
             return;
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
             if (currentPoints.Count == 0 || Vector2.Distance(currentPoints[currentPoints.Count - 1], pos) >= minDistance)
             {
                 currentPoints.Add(pos);
-                // Convertir la posiciÛn de pantalla a coordenadas locales del drawingArea
+                // Convertir la posici√≥n de pantalla a coordenadas locales del drawingArea
                 Vector2 localPoint;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingArea, pos, null, out localPoint);
                 currentLine.Points.Add(localPoint);
@@ -56,7 +57,16 @@ public class GameManager : MonoBehaviour
 
     void StartNewLine()
     {
-        GameObject lineObj = Instantiate(uiLinePrefab, drawingArea);
+        // Instanciamos la l√≠nea en red para que todos los clientes la vean
+        GameObject lineObj = PhotonNetwork.InstantiateRoomObject(
+            "LinesPrefab",       // Debe coincidir con el nombre del prefab en Resources
+            Vector3.zero,
+            Quaternion.identity,
+            0                        // Grupo de inter√©s (usualmente 0)
+        );
+        // Lo parentamos dentro de drawingArea para que aparezca en UI
+        lineObj.transform.SetParent(drawingArea, false);
+
         currentLine = lineObj.GetComponent<UILineRenderer>();
         if (currentLine == null)
         {
