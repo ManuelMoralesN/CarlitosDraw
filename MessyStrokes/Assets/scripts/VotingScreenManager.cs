@@ -7,10 +7,8 @@ using Photon.Pun;
 /// <summary>
 /// Maneja la UI de votación: muestra dibujos y recoge votos por turnos.
 /// Solo permite votar al jugador contrario al dueño del dibujo.
-/// Requiere un PhotonView para recibir RPCs.
 /// </summary>
-[RequireComponent(typeof(PhotonView))]
-public class VotingScreenManager : MonoBehaviourPunCallbacks
+public class VotingScreenManager : MonoBehaviour
 {
     [Header("UI de votación")]
     public GameObject votingPanel;
@@ -29,16 +27,10 @@ public class VotingScreenManager : MonoBehaviourPunCallbacks
     [Header("Configuración")]
     public float votingTime = 30f;
 
-    [HideInInspector]
-    public int player1Points = 0;
-    [HideInInspector]
-    public int player2Points = 0;
-
     /// <summary>
-    /// RPC que muestra el contenedor de votación para el jugador indicado.
+    /// Muestra el contenedor de votación para el jugador indicado en todos los clientes.
     /// </summary>
-    [PunRPC]
-    public void RPC_ShowVoteContainer(int owner)
+    public void ShowVoteContainer(int owner)
     {
         votingPanel.SetActive(true);
         referenceImageVoting?.SetActive(true);
@@ -63,7 +55,8 @@ public class VotingScreenManager : MonoBehaviourPunCallbacks
         resultText.gameObject.SetActive(false);
         scoreTableText.gameObject.SetActive(false);
 
-        int vote = 0; bool received = false;
+        int vote = 0;
+        bool received = false;
         voteMaloButton.onClick.AddListener(() => { vote = 0; received = true; });
         voteMehButton.onClick.AddListener(() => { vote = 1; received = true; });
         voteWowButton.onClick.AddListener(() => { vote = 3; received = true; });
@@ -76,7 +69,10 @@ public class VotingScreenManager : MonoBehaviourPunCallbacks
             yield return null;
         }
 
-        photonView.RPC("RPC_SubmitVote", RpcTarget.MasterClient, owner, vote);
+        // Enviar voto al MasterClient a través del PhotonView de LocalMultiplayerManager
+        LocalMultiplayerManager.Instance.photonView.RPC(
+            nameof(LocalMultiplayerManager.RPC_SubmitVote),
+            RpcTarget.MasterClient, owner, vote);
 
         voteMaloButton.onClick.RemoveAllListeners();
         voteMehButton.onClick.RemoveAllListeners();
@@ -86,21 +82,9 @@ public class VotingScreenManager : MonoBehaviourPunCallbacks
     }
 
     /// <summary>
-    /// RPC que recibe votos en el MasterClient.
+    /// Muestra el resultado final y el dibujo ganador.
     /// </summary>
-    [PunRPC]
-    public void RPC_SubmitVote(int owner, int voteValue, PhotonMessageInfo info)
-    {
-        if (!PhotonNetwork.IsMasterClient) return;
-        if (owner == 1) player1Points = voteValue;
-        else player2Points = voteValue;
-    }
-
-    /// <summary>
-    /// RPC que muestra el resultado final y dibujo ganador.
-    /// </summary>
-    [PunRPC]
-    public void RPC_ShowVoteResult(int p1, int p2)
+    public void ShowVoteResult(int p1, int p2)
     {
         votingPanel.SetActive(true);
         referenceImageVoting?.SetActive(true);

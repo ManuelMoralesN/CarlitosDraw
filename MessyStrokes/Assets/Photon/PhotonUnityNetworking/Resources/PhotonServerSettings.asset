@@ -45,6 +45,8 @@ MonoBehaviour:
   - RPC_ShowVoteContainer
   - RPC_ShowVoteResult
   - RPC_SubmitVote
+  - RPC_AddPoint
+  - RPC_ReparentLines
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

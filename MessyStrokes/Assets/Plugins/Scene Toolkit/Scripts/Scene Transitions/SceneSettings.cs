@@ -81,6 +81,6 @@ namespace CG.SceneToolkit
             transitionSettings.TransitionMaterial.SetFloat("_UseFade", transitionSettings.TransitionType == TransitionType.Fade ? 1f : 0f);
         }
 
-        private void OnDisable() => transitionSettings.TransitionMaterial.SetFloat("_Progress", 0f);
+       // private void OnDisable() => transitionSettings.TransitionMaterial.SetFloat("_Progress", 0f);
     }
 }

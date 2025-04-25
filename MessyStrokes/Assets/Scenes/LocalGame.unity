@@ -3105,6 +3105,8 @@ MonoBehaviour:
   player1Container: {fileID: 1085738707}
   player2Container: {fileID: 1181412012}
   votingScreenManager: {fileID: 1922551528}
+  player1Points: 0
+  player2Points: 0
 --- !u!4 &1363968478
 Transform:
   m_ObjectHideFlags: 0
@@ -3868,7 +3870,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1922551529}
   - component: {fileID: 1922551528}
-  - component: {fileID: 1922551530}
   m_Layer: 0
   m_Name: _VotingScreenManager
   m_TagString: Untagged
@@ -3899,8 +3900,6 @@ MonoBehaviour:
   scoreTableText: {fileID: 2047526580}
   referenceImageVoting: {fileID: 1815297587}
   votingTime: 10
-  player1Points: 0
-  player2Points: 0
 --- !u!4 &1922551529
 Transform:
   m_ObjectHideFlags: 0
@@ -3916,28 +3915,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1922551530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922551527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 2
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &1931849738
 GameObject:
   m_ObjectHideFlags: 0
