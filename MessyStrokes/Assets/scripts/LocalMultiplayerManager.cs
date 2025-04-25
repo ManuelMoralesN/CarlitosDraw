@@ -1,139 +1,160 @@
+// LocalMultiplayerManager.cs
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
-public class LocalMultiplayerManager : MonoBehaviour
+[RequireComponent(typeof(PhotonView))]
+public class LocalMultiplayerManager : MonoBehaviourPunCallbacks
 {
+    public static LocalMultiplayerManager Instance;
+
     [Header("Duraciones (segundos)")]
-    public float viewDuration = 30f;       // Tiempo para ver la imagen y el container
-    public float drawDuration = 30f;       // Tiempo para dibujar
-    public float turnEndDuration = 2f;     // Tiempo de mensaje de fin de turno
-    public float playerTime = 180f;        // Tiempo asignado por jugador (p.ej., 3 minutos)
+    public float viewDuration = 30f;
+    public float drawDuration = 30f;
+    public int totalRounds = 3;
 
     [Header("Referencias UI")]
-    public TextMeshProUGUI feedbackText;   // Texto para mensajes de feedback
-    public TextMeshProUGUI timerText;      // Texto para mostrar el contador principal
-    public GameObject referenceImage;      // Imagen de referencia (se muestra en la fase de vista)
-    public GameObject drawingCoverPanel;   // Panel que cubre la pantalla durante la fase de dibujo
+    public TextMeshProUGUI feedbackText;
+    public TextMeshProUGUI timerText;
+    public GameObject referenceImage;
+    public GameObject drawingCoverPanel;
 
-    [Header("Control de Dibujo")]
-    public GameManager drawingController;   // Componente que habilita la entrada para dibujar
-    public RectTransform drawingArea;               // Área de dibujo (contenedor temporal de los trazos)
+    [Header("Dibujo")]
+    public GameManager drawingController;
+    public RectTransform drawingArea;
 
-    [Header("Contenedores de Progreso")]
-    public RectTransform player1Container; // Container para guardar los trazos del jugador 1
-    public RectTransform player2Container; // Container para guardar los trazos del jugador 2
+    [Header("Gestor de votación")]
+    public VotingScreenManager votingScreenManager;
 
-    [Header("Votación")]
-    public VotingScreenManager votingScreenManager;  // Referencia al gestor de votación
+    // Contadores de puntos acumulados
+    private int totalVotesPlayer1;
+    private int totalVotesPlayer2;
 
-    private int currentPlayer = 1;
-    private float elapsedPlayer1 = 0f;
-    private float elapsedPlayer2 = 0f;
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
-        StartCoroutine(RunGame());
+        if (PhotonNetwork.IsMasterClient)
+            photonView.RPC(nameof(RPC_StartGame), RpcTarget.All);
     }
 
-    IEnumerator RunGame()
+    [PunRPC]
+    void RPC_StartGame()
     {
-        // Se repite mientras al menos uno de los jugadores tenga tiempo restante.
-        while (elapsedPlayer1 < playerTime || elapsedPlayer2 < playerTime)
+        StartCoroutine(GameFlow());
+    }
+
+    IEnumerator GameFlow()
+    {
+        for (int round = 1; round <= totalRounds; round++)
         {
-            if (currentPlayer == 1)
-            {
-                if (elapsedPlayer1 < playerTime)
-                {
-                    yield return StartCoroutine(RunTurn(1, player1Container));
-                }
-                currentPlayer = 2;
-            }
-            else // currentPlayer == 2
-            {
-                if (elapsedPlayer2 < playerTime)
-                {
-                    yield return StartCoroutine(RunTurn(2, player2Container));
-                }
-                currentPlayer = 1;
-            }
+            feedbackText.text = $"Ronda {round}/{totalRounds}";
+            timerText.text = "";
+            yield return new WaitForSeconds(1f);
+
+            // Fase de referencia
+            referenceImage.SetActive(true);
+            drawingCoverPanel.SetActive(false);
+            drawingController.enabled = false;
+            yield return Countdown(viewDuration, "Mira la referencia");
+            referenceImage.SetActive(false);
+
+            // Fase de dibujo
+            drawingCoverPanel.SetActive(true);
+            drawingController.enabled = true;
+            yield return Countdown(drawDuration, "Dibuja!");
+            drawingController.enabled = false;
+            drawingCoverPanel.SetActive(false);
+
+            feedbackText.text = "Fin de ronda";
+            timerText.text = "";
+            yield return new WaitForSeconds(2f);
         }
 
-        // Fin de la partida: se muestran los dibujos para votar.
-        feedbackText.text = "¡Partida terminada!";
-        timerText.text = "";
-        referenceImage.SetActive(true);
-        drawingCoverPanel.SetActive(false);
-
-        // Llama al gestor de votación.
-        votingScreenManager.ShowVotingScreen();
+        if (PhotonNetwork.IsMasterClient)
+            StartCoroutine(VotingOrchestrator());
     }
 
-    IEnumerator RunTurn(int playerNumber, RectTransform playerContainer)
+    IEnumerator Countdown(float duration, string prefix)
     {
-        // --- Fase de Vista ---
-        // Mostrar la imagen de referencia y el container del jugador (para que vea lo que ha pintado)
-        playerContainer.gameObject.SetActive(true);
-        referenceImage.SetActive(true);
-        drawingCoverPanel.SetActive(false);
-        drawingController.enabled = false;
-
-        float viewTimeLeft = viewDuration;
-        while (viewTimeLeft > 0f)
+        float t = duration;
+        while (t > 0f)
         {
-            feedbackText.text = "Jugador " + playerNumber + ": Tienes " + Mathf.Ceil(viewTimeLeft).ToString() + " s para ver la imagen y tus trazos.";
-            timerText.text = Mathf.Ceil(viewTimeLeft).ToString() + " s";
-            viewTimeLeft -= Time.deltaTime;
+            feedbackText.text = $"{prefix} ({Mathf.Ceil(t)}s)";
+            timerText.text = $"{Mathf.Ceil(t)} s";
+            t -= Time.deltaTime;
             yield return null;
         }
-        if (playerNumber == 1)
-            elapsedPlayer1 += viewDuration;
-        else
-            elapsedPlayer2 += viewDuration;
-
-        // Ocultar la imagen y el container al terminar la fase de vista.
-        referenceImage.SetActive(false);
-        playerContainer.gameObject.SetActive(false);
-
-        // --- Fase de Dibujo ---
-        // Se activa el panel que cubre la pantalla y se habilita el dibujo.
-        drawingCoverPanel.SetActive(true);
-        drawingController.enabled = true;
-
-        float drawTimeLeft = drawDuration;
-        while (drawTimeLeft > 0f)
-        {
-            feedbackText.text = "Jugador " + playerNumber + " Dibuja!";
-            timerText.text = Mathf.Ceil(drawTimeLeft).ToString() + " s";
-            drawTimeLeft -= Time.deltaTime;
-            yield return null;
-        }
-        if (playerNumber == 1)
-            elapsedPlayer1 += drawDuration;
-        else
-            elapsedPlayer2 += drawDuration;
-
-        // Finaliza el turno: deshabilita el dibujo, guarda los trazos en el container correspondiente y oculta el container.
-        drawingController.enabled = false;
-        ReparentChildren(drawingArea, playerContainer);
-        playerContainer.gameObject.SetActive(false);
-
-        feedbackText.text = "Turno finalizado para Jugador " + playerNumber;
-        yield return new WaitForSeconds(turnEndDuration);
-        if (playerNumber == 1)
-            elapsedPlayer1 += turnEndDuration;
-        else
-            elapsedPlayer2 += turnEndDuration;
     }
 
-    // Mueve todos los hijos (trazos) de 'drawingArea' al container 'to'
-    void ReparentChildren(RectTransform from, RectTransform to)
+    IEnumerator VotingOrchestrator()
     {
-        int count = from.childCount;
-        for (int i = count - 1; i >= 0; i--)
+        // 1) Reiniciar contadores
+        totalVotesPlayer1 = 0;
+        totalVotesPlayer2 = 0;
+
+        // 2) Reparent y mostrar trazos en votación
+        photonView.RPC(nameof(RPC_ReparentLines), RpcTarget.AllBuffered);
+        yield return new WaitForSeconds(0.5f);
+
+        // 3) Votación Jugador 1
+        photonView.RPC(nameof(RPC_ShowVoteContainer), RpcTarget.All, 1);
+        yield return new WaitForSeconds(votingScreenManager.votingTime + 0.5f);
+
+        // 4) Votación Jugador 2
+        photonView.RPC(nameof(RPC_ShowVoteContainer), RpcTarget.All, 2);
+        yield return new WaitForSeconds(votingScreenManager.votingTime + 0.5f);
+
+        // 5) Mostrar resultado final con los totales acumulados
+        photonView.RPC(
+            nameof(RPC_ShowVoteResult),
+            RpcTarget.All,
+            totalVotesPlayer1,
+            totalVotesPlayer2
+        );
+    }
+
+    [PunRPC]
+    void RPC_ReparentLines()
+    {
+        for (int i = drawingArea.childCount - 1; i >= 0; i--)
         {
-            Transform child = from.GetChild(i);
-            child.SetParent(to, false);
+            Transform stroke = drawingArea.GetChild(i);
+            var pv = stroke.GetComponent<PhotonView>();
+            if (pv != null && pv.Owner != null && pv.Owner.ActorNumber == 2)
+                stroke.SetParent(votingScreenManager.player2Container, false);
+            else
+                stroke.SetParent(votingScreenManager.player1Container, false);
+
+            stroke.gameObject.SetActive(true);
         }
+    }
+
+    [PunRPC]
+    void RPC_ShowVoteContainer(int owner)
+    {
+        votingScreenManager.ShowVoteContainer(owner);
+    }
+
+    [PunRPC]
+    public void RPC_SubmitVote(int owner, int voteValue, PhotonMessageInfo info)
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        // Acumula en lugar de sobrescribir
+        if (owner == 1)
+            totalVotesPlayer1 += voteValue;
+        else
+            totalVotesPlayer2 += voteValue;
+    }
+
+    [PunRPC]
+    void RPC_ShowVoteResult(int p1Total, int p2Total)
+    {
+        votingScreenManager.ShowVoteResult(p1Total, p2Total);
     }
 }

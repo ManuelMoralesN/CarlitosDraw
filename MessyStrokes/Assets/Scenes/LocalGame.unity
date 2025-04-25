@@ -3073,6 +3073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363968478}
   - component: {fileID: 1363968477}
+  - component: {fileID: 1363968479}
   m_Layer: 0
   m_Name: _MultiplayerManager
   m_TagString: Untagged
@@ -3092,10 +3093,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8802c276da26f8e4ebbd0397df7155c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewDuration: 30
-  drawDuration: 30
-  turnEndDuration: 2
-  playerTime: 180
+  viewDuration: 10
+  drawDuration: 10
+  totalRounds: 2
   feedbackText: {fileID: 232906212}
   timerText: {fileID: 494570355}
   referenceImage: {fileID: 103467569}
@@ -3105,6 +3105,8 @@ MonoBehaviour:
   player1Container: {fileID: 1085738707}
   player2Container: {fileID: 1181412012}
   votingScreenManager: {fileID: 1922551528}
+  player1Points: 0
+  player2Points: 0
 --- !u!4 &1363968478
 Transform:
   m_ObjectHideFlags: 0
@@ -3120,6 +3122,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1363968479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363968476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1477518982
 GameObject:
   m_ObjectHideFlags: 0
