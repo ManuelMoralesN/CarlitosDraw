@@ -14,7 +14,7 @@ public class PantallaManager : MonoBehaviour
 
     void Start()
     {
-        MostrarSolo(panelMenu); // Mostrar solo el menú al inicio
+        MostrarSolo(panelMenu); // Mostrar solo el menï¿½ al inicio
     }
 
     public void MostrarSolo(GameObject panel)
@@ -27,7 +27,7 @@ public class PantallaManager : MonoBehaviour
         panel.SetActive(true);
     }
 
-    // Métodos para los botones
+    // Mï¿½todos para los botones
     public void IrACrearSala() => MostrarSolo(panelCrear);
     public void IrAUnirseSala() => MostrarSolo(panelUnirse);
     public void IrALobby() => MostrarSolo(panelLobby);
@@ -38,7 +38,7 @@ public class PantallaManager : MonoBehaviour
 
     public void SalirApp() => Application.Quit();
 
-    // Método para alternar el silencio de la música
+    // Mï¿½todo para alternar el silencio de la mï¿½sica
     public void ToggleMusicMute()
     {
         if (musicAudioSource != null)
@@ -47,7 +47,7 @@ public class PantallaManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("AudioSource de música no asignado en PantallaManager.");
+            Debug.LogWarning("AudioSource de mï¿½sica no asignado en PantallaManager.");
         }
     }
 }

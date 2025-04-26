@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: c02df83085d348942a4dadd77ff0380a
+guid: fc90b60c6b2d358458cc5011994a4112
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 804019270346625881
-    second: jugadores_0
+      213: 2343466208395249479
+    second: "Dise\xF1o sin t\xEDtulo (41)_0"
   - first:
-      213: -7340649732101478775
-    second: jugadores_1
+      213: 4732223909962039414
+    second: "Dise\xF1o sin t\xEDtulo (41)_1"
   - first:
-      213: 3769594198708173471
-    second: jugadores_2
+      213: 8937913185436932569
+    second: "Dise\xF1o sin t\xEDtulo (41)_2"
   - first:
-      213: 1833567430335103241
-    second: jugadores_3
+      213: 8928962110974740337
+    second: "Dise\xF1o sin t\xEDtulo (41)_3"
   - first:
-      213: -9024764198876017043
-    second: jugadores_4
+      213: -4940303173764688282
+    second: "Dise\xF1o sin t\xEDtulo (41)_4"
   - first:
-      213: -4965485553412649662
-    second: jugadores_5
-  - first:
-      213: -8736286180842499008
-    second: jugadores_6
-  - first:
-      213: -8355191366960637216
-    second: jugadores_7
+      213: 168119287854806927
+    second: "Dise\xF1o sin t\xEDtulo (41)_5"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -121,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jugadores_0
+      name: "Dise\xF1o sin t\xEDtulo (41)_0"
       rect:
         serializedVersion: 2
-        x: 3
-        y: 15
-        width: 45
-        height: 82
+        x: 712
+        y: 607
+        width: 315
+        height: 413
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95354993443782b00800000000000000
-      internalID: 804019270346625881
+      spriteID: 747c78ea91aa58020800000000000000
+      internalID: 2343466208395249479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jugadores_1
+      name: "Dise\xF1o sin t\xEDtulo (41)_1"
       rect:
         serializedVersion: 2
-        x: 47
-        y: 15
-        width: 67
-        height: 82
+        x: 1036
+        y: 596
+        width: 370
+        height: 434
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 986668906f5c02a90800000000000000
-      internalID: -7340649732101478775
+      spriteID: 670c5eed29c3ca140800000000000000
+      internalID: 4732223909962039414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jugadores_2
+      name: "Dise\xF1o sin t\xEDtulo (41)_2"
       rect:
         serializedVersion: 2
-        x: 116
-        y: 16
-        width: 77
-        height: 83
+        x: 1398
+        y: 731
+        width: 13
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f9abf5993f9405430800000000000000
-      internalID: 3769594198708173471
+      spriteID: 9d99f33efa8d90c70800000000000000
+      internalID: 8937913185436932569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jugadores_3
+      name: "Dise\xF1o sin t\xEDtulo (41)_3"
       rect:
         serializedVersion: 2
-        x: 190
-        y: 17
-        width: 134
-        height: 80
+        x: 1406
+        y: 607
+        width: 356
+        height: 402
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 90189dcfcd3227910800000000000000
-      internalID: 1833567430335103241
+      spriteID: 17742957bbb0aeb70800000000000000
+      internalID: 8928962110974740337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jugadores_4
+      name: "Dise\xF1o sin t\xEDtulo (41)_4"
       rect:
         serializedVersion: 2
-        x: 323
-        y: 16
-        width: 78
-        height: 82
+        x: 1752
+        y: 618
+        width: 388
+        height: 402
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d6e0550c6c891c280800000000000000
-      internalID: -9024764198876017043
+      spriteID: 66655053074807bb0800000000000000
+      internalID: -4940303173764688282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jugadores_5
+      name: "Dise\xF1o sin t\xEDtulo (41)_5"
       rect:
         serializedVersion: 2
-        x: 399
-        y: 17
-        width: 68
-        height: 80
+        x: 1398
+        y: 695
+        width: 28
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,52 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24d418b823d071bb0800000000000000
-      internalID: -4965485553412649662
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jugadores_6
-      rect:
-        serializedVersion: 2
-        x: 464
-        y: 17
-        width: 59
-        height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0449abe510a72c680800000000000000
-      internalID: -8736286180842499008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: jugadores_7
-      rect:
-        serializedVersion: 2
-        x: 522
-        y: 16
-        width: 59
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0ea96ed28b56c0c80800000000000000
-      internalID: -8355191366960637216
+      spriteID: f873a700a97455200800000000000000
+      internalID: 168119287854806927
       vertices: []
       indices: 
       edges: []
@@ -310,14 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      jugadores_0: 804019270346625881
-      jugadores_1: -7340649732101478775
-      jugadores_2: 3769594198708173471
-      jugadores_3: 1833567430335103241
-      jugadores_4: -9024764198876017043
-      jugadores_5: -4965485553412649662
-      jugadores_6: -8736286180842499008
-      jugadores_7: -8355191366960637216
+      "Dise\xF1o sin t\xEDtulo (41)_0": 2343466208395249479
+      "Dise\xF1o sin t\xEDtulo (41)_1": 4732223909962039414
+      "Dise\xF1o sin t\xEDtulo (41)_2": 8937913185436932569
+      "Dise\xF1o sin t\xEDtulo (41)_3": 8928962110974740337
+      "Dise\xF1o sin t\xEDtulo (41)_4": -4940303173764688282
+      "Dise\xF1o sin t\xEDtulo (41)_5": 168119287854806927
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
