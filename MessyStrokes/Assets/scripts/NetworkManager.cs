@@ -9,7 +9,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public TMP_InputField roomNameInput;
     public TMP_InputField joinRoomInput;
     public PantallaManager pantallaManager;
-    public TextMeshProUGUI errorMessage;
+    public TextMeshProUGUI errorMessage; // <-- Nuevo
 
     // Imágenes para mostrar en el lobby
     public Image hostImage;   // Imagen del jugador host
@@ -61,10 +61,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         pantallaManager.IrALobby();
 
         // Muestra la imagen del host
-        hostImage.gameObject.SetActive(true);
-        
+        if (hostImage != null)
+        {
+            hostImage.gameObject.SetActive(true);
+        }
+
         // Si ya hay 2 jugadores, muestra la imagen del invitado
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1 && guestImage != null)
         {
             guestImage.gameObject.SetActive(true);
             guestImage.sprite = guestSprite; // Asigna la imagen del invitado
@@ -90,8 +93,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (errorMessage != null)
         {
             errorMessage.gameObject.SetActive(true);
-            errorMessage.text = "No se pudo unir: " + message;
-            Invoke(nameof(HideErrorMessage), 3f); // Ocultar después de 3 segundos
+
+            if (message.Contains("closed") || message.Contains("full"))
+            {
+                errorMessage.text = "Sala cerrada";
+            }
+            else
+            {
+                errorMessage.text = "No se pudo unir: " + message;
+            }
+
+            Invoke(nameof(HideErrorMessage), 3f); // <-- Ocultar mensaje después de 3 segundos
         }
     }
 
@@ -120,11 +132,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             $"{PhotonNetwork.CurrentRoom.MaxPlayers}"
         );
 
-        // Si es el invitado, muestra su imagen
+        // Si es el primer invitado, muestra la imagen del invitado y host
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
         {
-            guestImage.gameObject.SetActive(true);
-            guestImage.sprite = guestSprite; // Asigna la imagen del invitado
+            if (guestImage != null)
+            {
+                guestImage.gameObject.SetActive(true);
+                guestImage.sprite = guestSprite; // Asigna la imagen del invitado
+            }
         }
     }
 
@@ -137,6 +152,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         );
 
         // Cuando el jugador se va, ocultamos la imagen del invitado
-        guestImage.gameObject.SetActive(false);
+        if (guestImage != null)
+        {
+            guestImage.gameObject.SetActive(false);
+        }
+
+        // Cerrar la sala para que no entre nadie más
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+            Debug.Log("Sala cerrada para nuevos jugadores.");
+        }
     }
 }
